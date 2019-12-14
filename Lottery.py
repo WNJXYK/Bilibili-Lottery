@@ -23,7 +23,7 @@ data_frame = Frame(root)
 data_frame.pack(side="right")
 
 # Game Logic
-def play(max_iter = 100, n_disp = 50):
+def play(max_iter = 300, n_disp = 50):
     global player_arr, lottery_arr, name_arr, comment_arr, dm_arr, fans_opt, dm_opt
     player_arr, lottery_arr, name_arr =[], {}, {}
 
@@ -31,7 +31,7 @@ def play(max_iter = 100, n_disp = 50):
         if fans_opt.get() == 1 and (not comment_arr[mid][1]): continue
         if dm_opt.get() == 1 and (mid not in dm_arr): continue
         player_arr.append(mid)
-        lottery_arr[mid] = 10
+        lottery_arr[mid] = 25
         name_arr[mid] = comment_arr[mid][0]
 
     player_arr = np.array(player_arr)
@@ -121,7 +121,7 @@ def get_video_info():
     for mid in dm_arr:
         dm_list.insert(END, "%s(%d)" % (dm_arr[mid][0], mid))
 
-get_info = Button(setting_frame, text='Get Info', font=('Arial', 16), command=get_video_info)
+get_info = Button(setting_frame, text='Get Users', font=('Arial', 16), command=get_video_info)
 
 # Setting Frame
 aid_label.pack()

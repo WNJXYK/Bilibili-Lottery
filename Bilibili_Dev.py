@@ -63,9 +63,11 @@ class BDev:
         n_items = 50
         arr = self.get_comments_raw(aid, ps=n_items)
         n_pages = int((arr["pager"]["total"] + n_items - 1) / n_items)
-
         render_user(arr)
+        print(" * Bilibili-Dev : Comments pages %d / %d" % (1, n_pages))
+
         for cur_pages in range(2, n_pages + 1):
+            print(" * Bilibili-Dev : Comments pages %d / %d" % (cur_pages, n_pages))
             arr = self.get_comments_raw(aid, ps=n_items, pn=cur_pages)
             render_user(arr)
 
@@ -114,8 +116,10 @@ class BDev:
         arr = self.get_dm_raw(oid, ps=n_items)
         n_pages = int((arr["data"]["page"]["total"] + n_items - 1) / n_items)
         render_user(arr)
+        print(" * Bilibili-Dev : DM pages 1 / %d" % n_pages)
 
         for i in range(2, n_pages + 1):
+            print(" * Bilibili-Dev : DM pages %d / %d" % (i, n_pages))
             render_user(self.get_dm_raw(oid, ps=n_items, pn=i))
 
         if self.debug: print(user)
