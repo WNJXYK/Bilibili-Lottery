@@ -3,6 +3,10 @@ from Bilibili_Dev import BDev
 import numpy as np
 import matplotlib.pyplot as plt
 
+# 字体问题，开启下面的一行即可解决，或者找到电脑中有的中文字体填入
+# plt.rcParams['font.sans-serif'] = ['Songti SC']
+plt.rcParams['font.sans-serif'] = ['SimHei']
+
 # Variable
 
 root = Tk()
@@ -57,7 +61,6 @@ def play(max_iter = 300, n_disp = 50):
             y.append(lottery_arr[rnk_arr[i]])
 
         # Update Plot
-        plt.rcParams['font.sans-serif'] = ['Songti SC']
         plt.barh(range(n_disp), y, tick_label=x, color="y")
         plt.title("Step %d / %d" % (iter + 1, max_iter))
         plt.xlabel("Show Top %d of %d" % (n_disp, n))
