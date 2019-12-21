@@ -35,7 +35,7 @@ def play(max_iter = 300, n_disp = 50):
         if fans_opt.get() == 1 and (not comment_arr[mid][1]): continue
         if dm_opt.get() == 1 and (mid not in dm_arr): continue
         player_arr.append(mid)
-        lottery_arr[mid] = 25
+        lottery_arr[mid] = 20
         name_arr[mid] = comment_arr[mid][0]
 
     player_arr = np.array(player_arr)
@@ -44,7 +44,8 @@ def play(max_iter = 300, n_disp = 50):
     np.random.shuffle(player_arr)
 
     plt.ion()
-    for iter in range(max_iter):
+    iter = 0
+    while iter < max_iter:
         # Gift
         gift = np.random.choice(np.arange(n), size=n, replace=True)
         for i in range(n):
@@ -60,12 +61,13 @@ def play(max_iter = 300, n_disp = 50):
             x.append(name_arr[rnk_arr[i]])
             y.append(lottery_arr[rnk_arr[i]])
 
+        if iter + 1 == max_iter and (lottery_arr[rnk_arr[0]] == lottery_arr[rnk_arr[1]] or lottery_arr[rnk_arr[1]] == lottery_arr[rnk_arr[2]] or lottery_arr[rnk_arr[2]] == lottery_arr[rnk_arr[3]]): max_iter += 1
         # Update Plot
         plt.barh(range(n_disp), y, tick_label=x, color="y")
         plt.title("Step %d / %d" % (iter + 1, max_iter))
         plt.xlabel("Show Top %d of %d" % (n_disp, n))
         plt.show()
-        plt.pause(0.001)
+        plt.pause(0.005)
 
         # Clear / Show Result
         if iter + 1 < max_iter:
@@ -83,6 +85,7 @@ def play(max_iter = 300, n_disp = 50):
             fp.close()
 
             res_root.mainloop()
+        iter += 1
 
 # Setting Logic
 aid_label = Label(setting_frame, text="Video AV", font=('Arial', 16))
